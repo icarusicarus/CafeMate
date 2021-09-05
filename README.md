@@ -1,1 +1,1 @@
-# CaffeMate
+# CafeMate
