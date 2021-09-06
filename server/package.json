@@ -4,7 +4,7 @@
   "main": "app.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon app.js"
+    "dev": "nodemon --inspect=0.0.0.0 app.js"
   },
   "_moduleAliases": {
     "@src": "src",

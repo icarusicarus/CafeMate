@@ -110,3 +110,5 @@ dist
 **/._.DS_Store
 
 db_data
+
+.vscode
