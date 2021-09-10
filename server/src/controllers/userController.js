@@ -15,18 +15,18 @@ exports.register = async (req, res, next) => {
                 err: errors
             });
         } else {
-            const { username, password, nickname } = req.body;
-            const usernameCheck = await db.user.findOne({ where: { username }});
+            const { user_id, password, nickname } = req.body;
+            const userIdCheck = await db.user.findOne({ where: { user_id }});
 
-            if(usernameCheck) {
-                res.status(400).json({ msg: 'Duplicate username' });
+            if(userIdCheck) {
+                res.status(400).json({ msg: 'Duplicate user id' });
             }
 
             else {
                 const hash = await bcrypt.hash(password, 12);
                 await db.user
                 .create({
-                    username, password: hash, nickname,
+                    user_id, password: hash, nickname,
                     created_at: new Date().toString(),
                 })
                 .then(() => {
@@ -46,26 +46,15 @@ exports.register = async (req, res, next) => {
 };
 
 exports.login = (req, res, next) => {
-    passport.authenticate('local', (err, user, info) => {
-        console.log(user);
-        if(err) {
-            console.log('Login Error');
-            // res.status(400).json({ msg: 'Login Error' });
-        }
-        if(!user) {
-            console.log('No ID');
-            // res.status(400).json({ msg: 'No ID' });
-        }
-
+    passport.authenticate('local', (_, user, info) => {
         req.login(user, (err) => {
             if(err) {
-                console.log('Login Fail');
-                // res.status(400).json({ msg: 'Login Fail' });
+                res.status(400).json({ msg: info });
             }
             else {
-                console.log('Login Success');
-                // res.status(500).json({ msg: 'Login Success' });
+                console.log(info);
+                res.status(200).json({ msg: info });
             }
-        })
+        });
     }) (req, res, next);
 }

@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
                 primaryKey: true,
                 type: DataTypes.INTEGER,
             },
-            username: {
+            user_id: {
                 allowNull: false,
                 unique: true,
                 type: DataTypes.STRING(30),
@@ -22,6 +22,13 @@ module.exports = (sequelize, DataTypes) => {
             nickname: {
                 allowNull: false,
                 type: DataTypes.STRING(30)
+            },
+            sex: {
+                type: DataTypes.INTEGER
+            },
+            phone: {
+              allowNull: true,
+              type: DataTypes.STRING(12)
             },
             created_at: {
                 allowNull: false,

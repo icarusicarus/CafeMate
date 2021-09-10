@@ -9,7 +9,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
-      username: {
+      user_id: {
         allowNull: false,
         unique: true,
         type: Sequelize.STRING(30)
@@ -21,6 +21,13 @@ module.exports = {
       nickname: {
         allowNull: false,
         type: Sequelize.STRING(30)
+      },
+      sex: {
+        type: Sequelize.INTEGER
+      },
+      phone: {
+        allowNull: true,
+        type: Sequelize.STRING(12)
       },
       created_at: {
         allowNull: false,
