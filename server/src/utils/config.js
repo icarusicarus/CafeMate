@@ -8,6 +8,7 @@ const common = {
     username: env.USERNAME,
     password: env.PASSWORD,
     dialect: 'postgres',
+    timezone: 'Asia/Seoul',
     define: {
         timestamps: false,
         underscored: false,

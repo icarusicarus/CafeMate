@@ -11,6 +11,7 @@ services:
       - 8080:8080
       - 9229:9229
     command: bash -c "yarn && yarn dev"
+    init: true
   
   pg:
     container_name: pg
