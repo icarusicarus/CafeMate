@@ -7,12 +7,15 @@ const helmet = require('helmet');
 const cors = require('cors');
 const xss = require('xss-clean');
 const compression = require('compression');
+const passport = require('passport');
+const passportConfig = require('@utils/passport')
 const router = require('@router');
 const logger = require('@utils/logger');
 
 require('dotenv').config();
 
 const app = express();
+passportConfig();
 
 app.enable('trust proxy');
 
@@ -32,6 +35,8 @@ app.use(xss());
 app.use(compression());
 
 app.use(session({ secret: process.env.SECRET, resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(router);
 
