@@ -23,19 +23,23 @@ exports.register = async (req, res, next) => {
             }
 
             else {
-                const hash = await bcrypt.hash(password, 12);
-                await db.user
-                .create({
-                    user_id, password: hash, nickname,
-                    created_at: new Date().toString(),
+                const saltRound = 10;
+                bcrypt
+                .genSalt(saltRound)
+                .then(salt=> {
+                    return bcrypt.hash(password, salt);
                 })
-                .then(() => {
-                    res.status(201).json({ msg:'Register Success' })
-                })
-                .catch((e) => {
-                    res.status(500).json({
-                        msg: 'Internal Server Error',
-                        err: e
+                .then(async (hash) => {
+                    await db.user
+                    .create({
+                        user_id, password: hash, nickname,
+                        created_at: new Date().toString(),
+                    })
+                    .then(() => {
+                        res.status(200).json({ msg:'Register Success', hash: hash })
+                    })
+                    .catch((_) => {
+                        res.status(500).json({ msg: 'Register Fail' });
                     });
                 });
             }
