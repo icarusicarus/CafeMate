@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:kakao_flutter_sdk/all.dart';
+import 'package:kakao_flutter_sdk/auth.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import './Pages/LoginPage.dart';
 
-void main() => runApp(new CafeMate());
+Future main() async {
+  await dotenv.load(fileName: ".env");
+  KakaoContext.clientId = dotenv.env['NATIVE_KEY'].toString();
+  KakaoContext.javascriptClientId = dotenv.env['JS_KEY'].toString();
+  runApp(new CafeMate());
+}
 
 class CafeMate extends StatefulWidget {
   @override
@@ -12,8 +20,6 @@ class CafeMate extends StatefulWidget {
 class _CafeMateState extends State<CafeMate> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: LoginPage()
-    );
+    return MaterialApp(home: LoginPage());
   }
 }
