@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kakao_flutter_sdk/all.dart';
 
-import '../Models/User.dart';
+import '../Models/LocalUser.dart';
 import '../Utils/API.dart';
 import '../Utils/UserValidation.dart';
 
@@ -141,11 +141,11 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     onPressed: () async {
                       if(_formKey.currentState!.validate()) {
-                        User _user = User(
+                        LocalUser _localUser = LocalUser(
                           userId: _controller[0].text,
                           password: _controller[1].text
                         );
-                        await login(_user);
+                        await login(_localUser);
                       }
                     },
                   ),

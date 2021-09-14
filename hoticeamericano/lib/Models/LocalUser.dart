@@ -1,8 +1,8 @@
-class User {
+class LocalUser {
   int? id, sex;
   String? userId, password, nickname, phone;
 
-  User({ this.id, this.sex, this.userId, this.password, this.nickname, this.phone });
+  LocalUser({ this.id, this.sex, this.userId, this.password, this.nickname, this.phone });
 
   Map<String, dynamic> toMap() {
     return {

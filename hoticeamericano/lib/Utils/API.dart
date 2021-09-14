@@ -2,12 +2,12 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-import '../DB/User.dart';
-import '../Models/User.dart';
+import '../DB/LocalUser.dart';
+import '../Models/LocalUser.dart';
 
 String url = "http://localhost:8080/";
 
-Future<bool> register(User user) async {
+Future<bool> register(LocalUser user) async {
   final _registerRequest = await http.post(
     Uri.parse(url + "register"),
     headers: { "Content-Type": "application/json" },
@@ -30,7 +30,7 @@ Future<bool> register(User user) async {
   return false;
 }
 
-Future<bool> login(User user) async {
+Future<bool> login(LocalUser user) async {
   final _loginRequest = await http.post(
     Uri.parse(url + "login"),
     headers: { "Content-Type": "application/json" },

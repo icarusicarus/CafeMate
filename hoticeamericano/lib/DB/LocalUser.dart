@@ -1,12 +1,12 @@
 import 'package:sqflite/sqflite.dart';
 
 import './DBHelper.dart';
-import '../Models/User.dart';
+import '../Models/LocalUser.dart';
 
-Future<int> userInsert(User user) async {
+Future<int> userInsert(LocalUser user) async {
   final Database? _db = await DB.instance.database;
 
-  User _user = User(
+  LocalUser _user = LocalUser(
     id: 1,
     userId: user.userId,
     password: user.password
