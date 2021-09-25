@@ -9,21 +9,22 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  # Apache 2.0
   kakao_flutter_sdk: ^0.8.1
+
+  # MIT
+  cupertino_icons: ^1.0.2
+  sqflite: ^2.0.0+3
   dio: ^4.0.0
+  flutter_dotenv: ^5.0.2
+
+  # BSD
+  http: ^0.13.3
   json_annotation: ^4.0.1
   shared_preferences: ^2.0.5
   platform: ^3.0.0
   package_info_plus: ^1.0.4
-
-  cupertino_icons: ^1.0.2
-  flutter_dotenv: ^5.0.2
-
-  # MIT
-  sqflite: ^2.0.0+3
-
-  # BSD
-  http: ^0.13.3
 
 dev_dependencies:
   flutter_test:
@@ -34,3 +35,5 @@ flutter:
 
   assets:
     - .env
+    - assets/images/
+    - assets/cafe.json
