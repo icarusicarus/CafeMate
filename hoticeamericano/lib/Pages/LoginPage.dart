@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:kakao_flutter_sdk/all.dart';
 
 import '../Models/LocalUser.dart';
+import '../DB/LocalUser.dart';
 import '../Utils/API.dart';
 import '../Utils/UserValidation.dart';
-
+import '../Pages/MainPage.dart';
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   final List<TextEditingController> _controller = [ TextEditingController(), TextEditingController() ];
   final _formKey = GlobalKey<FormState>();
 
@@ -44,6 +44,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xff8D745B),
+      resizeToAvoidBottomInset: false,
       body: Container(
         padding: const EdgeInsets.only(right: 30.0, left: 30.0),
         child: Column(
@@ -140,13 +141,18 @@ class _LoginPageState extends State<LoginPage> {
                       )
                     ),
                     onPressed: () async {
-                      if(_formKey.currentState!.validate()) {
-                        LocalUser _localUser = LocalUser(
-                          userId: _controller[0].text,
-                          password: _controller[1].text
-                        );
-                        await login(_localUser);
-                      }
+                      // if(_formKey.currentState!.validate()) {
+                      //   LocalUser _localUser = LocalUser(
+                      //     userId: _controller[0].text,
+                      //     password: _controller[1].text
+                      //   );
+                      //   await login(_localUser);
+                      // }
+                      LocalUser _localUser = LocalUser(
+                        userId: "1",
+                        password: "11"
+                      );
+                      print(await login(_localUser));
                     },
                   ),
                   Container(
@@ -163,12 +169,12 @@ class _LoginPageState extends State<LoginPage> {
                       )
                     ),
                     onPressed: () async {
-                      // User _user = User(
-                      //   userId: _controller[0].text,
-                      //   password: _controller[1].text
-                      // );
+                      LocalUser _user = LocalUser(
+                        userId: _controller[0].text,
+                        password: _controller[1].text
+                      );
 
-                      // print(await userInsert(_user));
+                      print(await userInsert(_user));
                     },
                   ),
                   Container(
@@ -198,7 +204,10 @@ class _LoginPageState extends State<LoginPage> {
                           decoration: TextDecoration.underline
                         )
                       ),
-                      onTap: (() {}),
+                      onTap: (() {
+                        Navigator.pop(context);
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
+                      }),
                     )
                   )
                 ],
