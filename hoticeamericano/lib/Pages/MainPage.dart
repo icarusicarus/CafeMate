@@ -195,8 +195,8 @@ class _MainPageState extends State<MainPage> {
         elevation: 0.0,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Image.asset('assets/images/test.png', width: 24.0),
-            // icon: Icon(Icons.home, color: Colors.white,),
+            // icon: Image.asset('assets/images/test.png', width: 24.0),
+            icon: Icon(Icons.home, color: Colors.white,),
             label: '내쿠폰',
           ),
           BottomNavigationBarItem(
