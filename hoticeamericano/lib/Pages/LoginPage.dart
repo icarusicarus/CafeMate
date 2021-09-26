@@ -5,11 +5,9 @@ import 'package:flutter_naver_login/flutter_naver_login.dart';
 
 import '../Models/LocalUser.dart';
 import '../DB/LocalUser.dart';
-import '../Utils/API.dart';
 import '../Utils/UserValidation.dart';
 import '../Pages/MainPage.dart';
-import '../Pages/Layout.dart';
-import '../Pages/MyPage.dart';
+import '../Pages/Payment.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -137,26 +135,100 @@ class _LoginPageState extends State<LoginPage> {
                             kakaoLoginClicked()
                           },
                         ),
-                        Container(
-                            padding: const EdgeInsets.only(top: 30.0),
-                            child: InkWell(
-                              child: Text('계속하기',
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.white,
-                                      decoration: TextDecoration.underline)),
-                              onTap: (() {
-                                debugPrint("on taaaaaaaap");
-                                Navigator.pop(context);
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => MyPage()));
-                              }),
-                            ))
-                      ],
-                    )),
-              ],
-            )));
+                      ),
+                      validator: (_value) {
+                        if(passwordValidation(_value)) {
+                          return "한 개 이상의 대문자, 소문자, 숫자를 포함한 8자 이상 필요합니다.";
+                        }
+                      },
+                      obscureText: true,
+                    ),
+                  ],
+                )
+              )
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 50.0),
+              child: Column(
+                children: <Widget>[
+                  ElevatedButton(
+                    child: Text('로그인', style: TextStyle(color: Colors.black)),
+                    style: ElevatedButton.styleFrom(
+                      primary: Color(0xffFFB902),
+                      minimumSize: Size(double.infinity, 30),
+                      padding: const EdgeInsets.all(15.0),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0)
+                      )
+                    ),
+                    onPressed: () async {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Payment())
+                      );
+                    },
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(bottom: 10.0)
+                  ),
+                  ElevatedButton(
+                    child: Text('회원가입'),
+                    style: ElevatedButton.styleFrom(
+                      primary: Color(0xff271D0F),
+                      minimumSize: Size(double.infinity, 30),
+                      padding: const EdgeInsets.all(15.0),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0)
+                      )
+                    ),
+                    onPressed: () async {
+                      LocalUser _user = LocalUser(
+                        userId: _controller[0].text,
+                        password: _controller[1].text
+                      );
+
+                      print(await userInsert(_user));
+                    },
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(bottom: 10.0)
+                  ),
+                  ElevatedButton(
+                    child: Text('카카오계정 로그인'),
+                    style: ElevatedButton.styleFrom(
+                      primary: Color(0xff271D0F),
+                      minimumSize: Size(double.infinity, 30),
+                      padding: const EdgeInsets.all(15.0),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0)
+                      )
+                    ),
+                    onPressed: () => {kakaoLogin()},
+                  ),
+
+                  Container(
+                    padding: const EdgeInsets.only(top: 30.0),
+                    child: InkWell(
+                      child: Text(
+                        '계속하기',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.white,
+                          decoration: TextDecoration.underline
+                        )
+                      ),
+                      onTap: (() {
+                        Navigator.pop(context);
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
+                      }),
+                    )
+                  )
+                ],
+              )
+            ),
+          ],
+        )
+      )
+    );
   }
 }

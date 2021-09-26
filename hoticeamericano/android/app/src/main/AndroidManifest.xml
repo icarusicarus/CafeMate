@@ -2,7 +2,8 @@
     package="com.example.hoticeamericano">
    <application
         android:label="hoticeamericano"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:usesCleartextTraffic="true">
         android:name="io.flutter.app.FlutterApplication"
         <meta-data
             android:name="com.naver.sdk.clientId"

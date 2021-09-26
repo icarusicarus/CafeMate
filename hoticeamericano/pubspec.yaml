@@ -18,6 +18,7 @@ dependencies:
   sqflite: ^2.0.0+3
   dio: ^4.0.0
   flutter_dotenv: ^5.0.2
+  iamport_flutter: ^0.10.0-dev.4
 
   # BSD
   http: ^0.13.3
@@ -25,11 +26,15 @@ dependencies:
   shared_preferences: ^2.0.5
   platform: ^3.0.0
   package_info_plus: ^1.0.4
+  dart_json_mapper:
   flutter_naver_login: ^1.2.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  
+  build_runner:
+  flutter_native_splash: ^1.2.4
 
 flutter:
   uses-material-design: true
