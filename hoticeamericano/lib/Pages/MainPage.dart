@@ -50,7 +50,7 @@ class _MainPageState extends State<MainPage> {
       body: Container(
         margin: const EdgeInsets.only(top: 10.0),
         padding: const EdgeInsets.only(top: 10.0),
-        width: double.infinity,
+        height: double.infinity,
         decoration: BoxDecoration(
           color: Color(0xff8D745B),
           borderRadius: BorderRadius.only(

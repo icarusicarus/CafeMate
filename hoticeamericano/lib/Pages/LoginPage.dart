@@ -3,9 +3,9 @@ import 'package:kakao_flutter_sdk/all.dart';
 
 import '../Models/LocalUser.dart';
 import '../DB/LocalUser.dart';
-import '../Utils/API.dart';
 import '../Utils/UserValidation.dart';
 import '../Pages/MainPage.dart';
+import '../Pages/Payment.dart';
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -141,18 +141,10 @@ class _LoginPageState extends State<LoginPage> {
                       )
                     ),
                     onPressed: () async {
-                      // if(_formKey.currentState!.validate()) {
-                      //   LocalUser _localUser = LocalUser(
-                      //     userId: _controller[0].text,
-                      //     password: _controller[1].text
-                      //   );
-                      //   await login(_localUser);
-                      // }
-                      LocalUser _localUser = LocalUser(
-                        userId: "1",
-                        password: "11"
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Payment())
                       );
-                      print(await login(_localUser));
                     },
                   ),
                   Container(
