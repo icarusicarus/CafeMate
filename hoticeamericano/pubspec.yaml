@@ -27,6 +27,7 @@ dependencies:
   platform: ^3.0.0
   package_info_plus: ^1.0.4
   dart_json_mapper:
+  flutter_naver_login: ^1.2.2
 
 dev_dependencies:
   flutter_test:
