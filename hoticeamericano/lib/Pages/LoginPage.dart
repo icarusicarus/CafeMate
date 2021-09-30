@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kakao_flutter_sdk/auth.dart';
-import 'package:kakao_flutter_sdk/all.dart';
+import 'package:kakao_flutter_sdk/user.dart';
 import 'package:flutter_naver_login/flutter_naver_login.dart';
 
 import '../Models/LocalUser.dart';
 import '../DB/LocalUser.dart';
-import '../Pages/MainPage.dart';
-import '../Pages/Payment.dart';
+import '../Pages/ControllerPage.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -14,36 +13,23 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final List<TextEditingController> _controller = [
-    TextEditingController(),
-    TextEditingController()
-  ];
-
-  bool rememberCheck = false;
-
-  issueAccessToken(String authCode) async {
+  _issueAccessToken(String authCode) async {
     try {
-      debugPrint("in issue acc tok");
       var token = await AuthApi.instance.issueAccessToken(authCode);
-      print(token);
-      debugPrint("redirect to main");
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => MainPage(),
-        ));
+      TokenManager.instance.setToken(token);
     } catch (e) {
       print(e.toString());
     }
   }
 
-  kakaoLogin() async {
+  _loginKakao() async {
     try {
-      debugPrint("in kakaologin");
       var code = await AuthCodeClient.instance.request();
-      debugPrint("code is");
-      debugPrint(code);
-      await issueAccessToken(code);
+      await _issueAccessToken(code);
+
+      _insertKakaoInfo();
+
+      Navigator.push(context, MaterialPageRoute(builder: (context) => ControllerPage()));
     } on KakaoAuthException catch (e) {
       print(e.toString());
     } on KakaoClientException catch (e) {
@@ -53,29 +39,47 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  void kakaoLoginClicked() async {
+  void _insertKakaoInfo() async {
     try {
-      debugPrint('on it');
-      await UserApi.instance.loginWithKakaoAccount();
-      debugPrint('login');
-      MaterialPageRoute(
-        builder: (context) => MainPage(),
+      User _user = await UserApi.instance.me();
+
+      LocalUser _localUser = LocalUser(
+        userNumber: _user.id.toString(),
+        kind: 0,
+        name: _user.kakaoAccount?.profile?.nickname,
+        email: _user.kakaoAccount?.email
       );
-    } catch (e) {
-      debugPrint('Error in Kakao Login: $e');
+      await insertUser(_localUser);
+    } catch(e) {
+      debugPrint('$e');
     }
   }
 
-  void naverLoginClicked() async {
+  void _loginNaver() async {
     try {
-      debugPrint('on it');
-      await FlutterNaverLogin.logIn();
-      debugPrint('login');
-      MaterialPageRoute(
-        builder: (context) => MainPage(),
-      );
+      NaverLoginResult res = await FlutterNaverLogin.logIn();
+      NaverAccessToken token = await FlutterNaverLogin.currentAccessToken;
+      print(token.toString());
+
+      _insertNaverInfo(res);
+
+      Navigator.push(context, MaterialPageRoute(builder: (context) => ControllerPage()));
     } catch (e) {
-      debugPrint('Error in Kakao Login: $e');
+      print(e);
+    }
+  }
+
+  void _insertNaverInfo(NaverLoginResult res) async {
+    try {
+      LocalUser _localUser = LocalUser(
+        userNumber: res.account.id,
+        kind: 1,
+        name: res.account.nickname,
+        email: res.account.email
+      );
+      await insertUser(_localUser);
+    } catch(e) {
+      print(e);
     }
   }
 
@@ -104,102 +108,27 @@ class _LoginPageState extends State<LoginPage> {
               margin: const EdgeInsets.only(top: 200.0),
               child: Column(
                 children: <Widget>[
-                  Container(padding: const EdgeInsets.only(bottom: 10.0)),
-                  ElevatedButton(
-                    child: Text('네이버로 로그인'),
-                    style: ElevatedButton.styleFrom(
-                        primary: Color(0xff03c75a),
-                        minimumSize: Size(double.infinity, 30),
-                        padding: const EdgeInsets.all(15.0),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0))),
-                    onPressed: () => {
-                      debugPrint("on pressssss naver"),
-                      naverLoginClicked()
-                    },
-                  ),
-                  Container(padding: const EdgeInsets.only(bottom: 10.0)),
-                  ElevatedButton(
-                    child: Text(
-                      '카카오계정 로그인',
-                      style: TextStyle(color: Colors.black),
+                  Container(
+                    width: 600,
+                    height: 90,
+                    child: IconButton(
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,  
+                      icon: Image.asset('assets/images/naver_login.png'),
+                      onPressed: () => { _loginNaver() },
                     ),
-                    style: ElevatedButton.styleFrom(
-                        primary: Color(0xfffee500),
-                        minimumSize: Size(double.infinity, 30),
-                        padding: const EdgeInsets.all(15.0),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0))),
-                    onPressed: () => {
-                      debugPrint("on pressssss kakao"),
-                      kakaoLoginClicked()
-                    },
-                  ),
-                ]
-              ),
-            ),
-            
-            Container(
-              margin: const EdgeInsets.only(top: 50.0),
-              child: Column(
-                children: <Widget>[
-                  ElevatedButton(
-                    child: Text('로그인', style: TextStyle(color: Colors.black)),
-                    style: ElevatedButton.styleFrom(
-                      primary: Color(0xffFFB902),
-                      minimumSize: Size(double.infinity, 30),
-                      padding: const EdgeInsets.all(15.0),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0)
-                      )
-                    ),
-                    onPressed: () async {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Payment())
-                      );
-                    },
                   ),
                   Container(
-                    padding: const EdgeInsets.only(bottom: 10.0)
-                  ),
-                  ElevatedButton(
-                    child: Text('회원가입'),
-                    style: ElevatedButton.styleFrom(
-                      primary: Color(0xff271D0F),
-                      minimumSize: Size(double.infinity, 30),
-                      padding: const EdgeInsets.all(15.0),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0)
-                      )
+                    width: 600,
+                    height: 90,
+                    child: IconButton(
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,  
+                      icon: Image.asset('assets/images/kakao_login.png'),
+                      onPressed: () => { _loginKakao() },
                     ),
-                    onPressed: () async {
-                      LocalUser _user = LocalUser(
-                        userId: _controller[0].text,
-                        password: _controller[1].text
-                      );
-
-                      print(await userInsert(_user));
-                    },
                   ),
                   Container(
-                    padding: const EdgeInsets.only(bottom: 10.0)
-                  ),
-                  ElevatedButton(
-                    child: Text('카카오계정 로그인'),
-                    style: ElevatedButton.styleFrom(
-                      primary: Color(0xff271D0F),
-                      minimumSize: Size(double.infinity, 30),
-                      padding: const EdgeInsets.all(15.0),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0)
-                      )
-                    ),
-                    onPressed: () => {kakaoLogin()},
-                  ),
-
-                  Container(
-                    padding: const EdgeInsets.only(top: 30.0),
                     child: InkWell(
                       child: Text(
                         '계속하기',
@@ -211,7 +140,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       onTap: (() {
                         Navigator.pop(context);
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => ControllerPage()));
                       }),
                     )
                   )
