@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../Models/Cafe.dart';
-import '../DB/Cafe.dart';
-import './Section/CafeInformation.dart';
-import './Section/CafeCard.dart';
-import './Section/CafeCardPadding.dart';
-import '../Pages/MainPage.dart';
+import './MainPage.dart';
 
 Column _buildButtonColumn(String label) {
   debugPrint(label);
@@ -58,61 +53,11 @@ class MyPage extends StatefulWidget {
 class _MyPageState extends State<MyPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        centerTitle: true,
-        title: Text('내 정보',
-            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
-        leading: IconButton(
-          icon: const Icon(Icons.navigate_before),
-          color: Colors.black,
-          tooltip: '뒤로가기',
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => MainPage()));
-          },
-        ),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.more_vert),
-            color: Colors.black,
-            tooltip: 'Show more',
-            onPressed: () {},
-          ),
-        ],
-      ),
-      body: Column(
+    return Container(
+      color: Colors.white,
+      child: Column(
         children: [titleSection, buttonSection, detailSection],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Color(0xff271D0F),
-        elevation: 0.0,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            // icon: Image.asset('assets/images/test.png', width: 24.0),
-            icon: Icon(
-              Icons.home,
-              color: Colors.white,
-            ),
-            label: '내쿠폰',
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home, color: Colors.white, size: 24.0),
-              label: '홈'),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-                color: Colors.white,
-              ),
-              label: '내정보'),
-        ],
-        selectedLabelStyle: TextStyle(fontSize: 10.0),
-        unselectedLabelStyle: TextStyle(fontSize: 10.0),
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white,
-      ),
+      )
     );
   }
 }

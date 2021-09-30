@@ -7,47 +7,47 @@ import '../Models/LocalUser.dart';
 
 String url = "http://localhost:8080/";
 
-Future<bool> register(LocalUser user) async {
-  final _registerRequest = await http.post(
-    Uri.parse(url + "register"),
-    headers: { "Content-Type": "application/json" },
-    body: json.encode({
-      "user_id": user.userId,
-      "password": user.password,
-      "nickname": user.nickname,
-      "sex": user.sex,
-      "phone": user.phone
-    })
-  );
-  Map<String, dynamic> _registerResponse = jsonDecode(_registerRequest.body);
+// Future<bool> register(LocalUser user) async {
+//   final _registerRequest = await http.post(
+//     Uri.parse(url + "register"),
+//     headers: { "Content-Type": "application/json" },
+//     body: json.encode({
+//       "user_id": user.userId,
+//       "password": user.password,
+//       "nickname": user.nickname,
+//       "sex": user.sex,
+//       "phone": user.phone
+//     })
+//   );
+//   Map<String, dynamic> _registerResponse = jsonDecode(_registerRequest.body);
 
-  if(_registerRequest.statusCode == 200) {
-    user.password = _registerResponse['hash'];
-    await userInsert(user);
-    return true;
-  }
+//   if(_registerRequest.statusCode == 200) {
+//     user.password = _registerResponse['hash'];
+//     await userInsert(user);
+//     return true;
+//   }
 
-  return false;
-}
+//   return false;
+// }
 
-Future<bool> login(LocalUser user) async {
-  final _loginRequest = await http.post(
-    Uri.parse(url + "login"),
-    headers: { "Content-Type": "application/json" },
-    body: json.encode({
-      "user_id": user.userId,
-      "password": user.password
-    })
-  );
+// Future<bool> login(LocalUser user) async {
+//   final _loginRequest = await http.post(
+//     Uri.parse(url + "login"),
+//     headers: { "Content-Type": "application/json" },
+//     body: json.encode({
+//       "user_id": user.userId,
+//       "password": user.password
+//     })
+//   );
   
-  if(_loginRequest.statusCode == 200) {
-    return true;
-  }
-  else {
-    return false;
-  }
-}
+//   if(_loginRequest.statusCode == 200) {
+//     return true;
+//   }
+//   else {
+//     return false;
+//   }
+// }
 
-void logout() async {
-  await userDelete();
-}
+// void logout() async {
+//   await userDelete();
+// }
