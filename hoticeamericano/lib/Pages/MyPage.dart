@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import './MainPage.dart';
 
 class MyPage extends StatefulWidget {
@@ -20,9 +19,9 @@ class _MyPageState extends State<MyPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Expanded(child: Icon(Icons.arrow_back_ios)),
+                SizedBox(width: 80.0),
                 Expanded(
-                    flex: 2,
+                    flex: 3,
                     child: Text(
                       '내 정보',
                       textAlign: TextAlign.center,
