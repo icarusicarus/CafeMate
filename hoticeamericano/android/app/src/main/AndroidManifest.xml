@@ -43,6 +43,9 @@
             </intent-filter>
         </activity>
         <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDyHYhe4Sqmeb08CYO4Gw0iXGlWaKP2NIQ"/>
+        <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
