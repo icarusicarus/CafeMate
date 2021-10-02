@@ -47,11 +47,14 @@ class _MainPageState extends State<MainPage> {
                         onSelected: (Cafe selection) {
                           // print(selection.name);
                         },
+
                         fieldViewBuilder: (BuildContext context, TextEditingController controller, FocusNode focusNode, VoidCallback voidCallback) {
+
                           return TextField(
                             controller: controller,
                             focusNode: focusNode,
                             decoration: InputDecoration(
+
                               prefixIcon: Icon(Icons.search, color: Colors.black),
                               suffixIcon: IconButton(
                                 icon: Icon(Icons.close),
