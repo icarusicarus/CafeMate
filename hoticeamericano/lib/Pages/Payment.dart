@@ -34,11 +34,12 @@ class Payment extends StatelessWidget {
         appScheme: 'example'
       ),
       callback: (Map<String, String> result) {
-        Navigator.pushReplacementNamed(
-          context,
-          '/result',
-          arguments: result
-        );
+        Navigator.pop(context, result);
+      //   Navigator.pushReplacementNamed(
+      //     context,
+      //     '/gifticon',
+      //     arguments: result
+      //   );
       },
     );
   }
