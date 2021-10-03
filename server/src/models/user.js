@@ -1,7 +1,8 @@
 const moment = require('moment');
 
+'use strict';
 module.exports = (sequelize, DataTypes) => {
-    const User = sequelize.define(
+    const user = sequelize.define(
         'user',
         {
             id: {
@@ -10,25 +11,22 @@ module.exports = (sequelize, DataTypes) => {
                 primaryKey: true,
                 type: DataTypes.INTEGER,
             },
-            user_id: {
+            userNumber: {
                 allowNull: false,
                 unique: true,
-                type: DataTypes.STRING(30),
-            },
-            password: {
-                allowNull: false,
                 type: DataTypes.STRING(60),
             },
-            nickname: {
+            kind: {
                 allowNull: false,
-                type: DataTypes.STRING(30)
+                type: DataTypes.INTEGER,
             },
-            sex: {
-                type: DataTypes.INTEGER
+            name: {
+                allowNull: false,
+                type: DataTypes.STRING(60)
             },
-            phone: {
+            email: {
               allowNull: true,
-              type: DataTypes.STRING(12)
+              type: DataTypes.STRING(30)
             },
             created_at: {
                 allowNull: false,
@@ -50,5 +48,5 @@ module.exports = (sequelize, DataTypes) => {
         }
     );
 
-    return User;
+    return user;
 }

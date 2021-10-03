@@ -1,11 +1,7 @@
 const router = require('express').Router();
 const userController = require('@controllers/userController');
+const userValidator = require('@utils/userValidator')
 
-router.get('/', function(req, res, next) {
-    res.json({ title: 'ss'});
-});
-
-router.post('/register', userController.register);
-router.post('/login', userController.login);
+router.post('/login', userValidator, userController.login);
 
 module.exports = router;
