@@ -28,8 +28,8 @@ dependencies:
   package_info_plus: ^1.0.4
   dart_json_mapper:
   flutter_naver_login: ^1.2.2
-  google_maps: ^5.3.0
   json_serializable: ^5.0.2
+  google_maps_flutter: ^2.0.11
 
 dev_dependencies:
   flutter_test:

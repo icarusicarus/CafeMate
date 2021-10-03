@@ -7,6 +7,7 @@ import '../DB/Cafe.dart';
 import './Section/MenuCard.dart';
 import './Section/CafeInformation.dart';
 import './Section/CafeCardPadding.dart';
+import './Section/CafeMapInfo.dart';
 
 class CafePage extends StatefulWidget {
   @override
@@ -17,6 +18,13 @@ class _CafePageState extends State<CafePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        // appBar: AppBar(
+        //   backgroundColor: Colors.transparent,
+        //   leading: IconButton(
+        //     icon: Icon(Icons.arrow_back_ios),
+        //     onPressed: () => {Navigator.pop(context)},
+        //   ),
+        // ),
         body: Container(
       height: double.infinity,
       decoration: new BoxDecoration(
@@ -115,6 +123,7 @@ class _CafePageState extends State<CafePage> {
                     ),
                     // CafeMap()
                     CafeInformation()
+                    //CafeMapInfo()
                   ],
                 )),
           ]))),
