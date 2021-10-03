@@ -6,8 +6,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'main.mapper.g.dart' show initializeJsonMapper;
 
 import './Pages/LoginPage.dart';
-import './Pages/Result.dart';
-import './Pages/Gifticon.dart';
+import './Pages/GifticonPage.dart';
 
 Future main() async {
   await dotenv.load(fileName: ".env");
@@ -30,8 +29,7 @@ class _CafeMateState extends State<CafeMate> {
     return MaterialApp(
       home: LoginPage(),
       routes: {
-        '/result': (context) => Result(),
-        '/gifticon': (context) => Gifticon(),
+        '/gifticon': (context) => GifticonPage(),
       },
     );
   }

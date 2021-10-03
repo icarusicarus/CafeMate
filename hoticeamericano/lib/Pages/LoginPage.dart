@@ -4,8 +4,8 @@ import 'package:kakao_flutter_sdk/user.dart';
 import 'package:flutter_naver_login/flutter_naver_login.dart';
 
 import '../Models/LocalUser.dart';
-import '../DB/LocalUser.dart';
 import '../Pages/ControllerPage.dart';
+import '../Utils/API.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -27,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
       var code = await AuthCodeClient.instance.request();
       await _issueAccessToken(code);
 
-      _insertKakaoInfo();
+      await _insertKakaoInfo();
 
       Navigator.push(context, MaterialPageRoute(builder: (context) => ControllerPage()));
     } on KakaoAuthException catch (e) {
@@ -39,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  void _insertKakaoInfo() async {
+  Future<void> _insertKakaoInfo() async {
     try {
       User _user = await UserApi.instance.me();
 
@@ -49,9 +49,10 @@ class _LoginPageState extends State<LoginPage> {
         name: _user.kakaoAccount?.profile?.nickname,
         email: _user.kakaoAccount?.email
       );
-      await insertUser(_localUser);
+
+      await login(_localUser);
     } catch(e) {
-      debugPrint('$e');
+      print(e);
     }
   }
 
@@ -61,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
       NaverAccessToken token = await FlutterNaverLogin.currentAccessToken;
       print(token.toString());
 
-      _insertNaverInfo(res);
+      await _insertNaverInfo(res);
 
       Navigator.push(context, MaterialPageRoute(builder: (context) => ControllerPage()));
     } catch (e) {
@@ -69,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  void _insertNaverInfo(NaverLoginResult res) async {
+  Future<void> _insertNaverInfo(NaverLoginResult res) async {
     try {
       LocalUser _localUser = LocalUser(
         userNumber: res.account.id,
@@ -77,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
         name: res.account.nickname,
         email: res.account.email
       );
-      await insertUser(_localUser);
+      await login(_localUser);
     } catch(e) {
       print(e);
     }
@@ -89,24 +90,33 @@ class _LoginPageState extends State<LoginPage> {
       backgroundColor: Color(0xff8D745B),
       resizeToAvoidBottomInset: false,
       body: Container(
-        padding: const EdgeInsets.only(right: 30.0, left: 30.0),
         child: Column(
+          // crossAxisAlignment: CrossAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.end,
+          // mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                '안녕하세요.\n반갑습니다.',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  fontSize: 30.0
-                ),
-              )
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 200.0),
               child: Column(
+                children: <Widget>[
+                  Image.asset(
+                    'assets/images/splash_logo.png',
+                    width: 200.0,
+                  ),
+                  Text(
+                    '취향의 카페를 찾아보세요.',
+                    style: TextStyle(
+                      color: Colors.white
+                    )
+                  )
+                ],
+              ),
+            ),
+
+            Container(
+              // padding: const EdgeInsets.only(top: 0.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   Container(
                     width: 600,
@@ -114,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: IconButton(
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,  
-                      icon: Image.asset('assets/images/naver_login.png'),
+                      icon: Image.asset('assets/images/naver_login2.png'),
                       onPressed: () => { _loginNaver() },
                     ),
                   ),
@@ -124,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: IconButton(
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,  
-                      icon: Image.asset('assets/images/kakao_login.png'),
+                      icon: Image.asset('assets/images/kakao_login2.png'),
                       onPressed: () => { _loginKakao() },
                     ),
                   ),

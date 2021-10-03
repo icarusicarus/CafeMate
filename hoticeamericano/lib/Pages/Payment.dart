@@ -3,9 +3,19 @@ import 'package:iamport_flutter/iamport_payment.dart';
 import 'package:iamport_flutter/model/payment_data.dart';
 
 class Payment extends StatelessWidget {
+  Payment({ required this.price });
+  final int price;
+
   @override
   Widget build(BuildContext context) {
     return IamportPayment(
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.black),
+        centerTitle: true,
+        title: Text('결제하기', style: TextStyle(color: Colors.black)),
+        backgroundColor: Colors.white,
+        elevation: 0.0,
+      ),
       initialChild: Container(
         child: Center(
           child: Column(
@@ -25,7 +35,7 @@ class Payment extends StatelessWidget {
         payMethod : 'card',
         merchantUid: 'mid_${DateTime.now().millisecondsSinceEpoch}',
         name: '주문명:결제테스트',
-        amount: 1,
+        amount: price,
         buyerEmail: 'iamport@siot.do',
         buyerName: '구매자이름',
         buyerTel: '010-1234-5678',
@@ -35,11 +45,12 @@ class Payment extends StatelessWidget {
       ),
       callback: (Map<String, String> result) {
         Navigator.pop(context, result);
-      //   Navigator.pushReplacementNamed(
-      //     context,
-      //     '/gifticon',
-      //     arguments: result
-      //   );
+        // Navigator.pop(context, [result, price]);
+        // Navigator.pushReplacementNamed(
+        //   context,
+        //   '/gifticon',
+        //   arguments: result
+        // );
       },
     );
   }

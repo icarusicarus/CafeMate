@@ -10,7 +10,7 @@ Widget CafeInformation()
       children: <Widget>[
         Container(
           width: double.infinity,
-          height: imageCardHeight,
+          height: cafeCardHeight,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
               topLeft: const Radius.circular(10.0),
