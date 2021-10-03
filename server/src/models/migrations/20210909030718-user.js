@@ -9,25 +9,22 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
-      user_id: {
+      userNumber: {
         allowNull: false,
         unique: true,
-        type: Sequelize.STRING(30)
+        type: Sequelize.STRING(60)
       },
-      password: {
+      kind: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      name: {
         allowNull: false,
         type: Sequelize.STRING(60)
       },
-      nickname: {
-        allowNull: false,
-        type: Sequelize.STRING(30)
-      },
-      sex: {
-        type: Sequelize.INTEGER
-      },
-      phone: {
+      email: {
         allowNull: true,
-        type: Sequelize.STRING(12)
+        type: Sequelize.STRING(30)
       },
       created_at: {
         allowNull: false,
@@ -36,7 +33,7 @@ module.exports = {
     });
   },
 
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface, _) => {
     await queryInterface.dropTable('user');
   }
 };
