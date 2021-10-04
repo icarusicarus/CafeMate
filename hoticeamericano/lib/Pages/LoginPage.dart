@@ -91,9 +91,6 @@ class _LoginPageState extends State<LoginPage> {
       resizeToAvoidBottomInset: false,
       body: Container(
         child: Column(
-          // crossAxisAlignment: CrossAxisAlignment.center,
-          // mainAxisAlignment: MainAxisAlignment.end,
-          // mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
@@ -114,7 +111,6 @@ class _LoginPageState extends State<LoginPage> {
             ),
 
             Container(
-              // padding: const EdgeInsets.only(top: 0.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
@@ -148,7 +144,8 @@ class _LoginPageState extends State<LoginPage> {
                           decoration: TextDecoration.underline
                         )
                       ),
-                      onTap: (() {
+                      onTap: (() async {
+                        // await updateGifticon(6000);
                         Navigator.pop(context);
                         Navigator.push(context, MaterialPageRoute(builder: (context) => ControllerPage()));
                       }),

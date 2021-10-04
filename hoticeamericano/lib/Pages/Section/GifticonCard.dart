@@ -49,8 +49,8 @@ Widget GifticonCard(BuildContext context, int price) {
         MaterialPageRoute(builder: (context) => Payment(price: 4000))
       );
 
-      if(result!['imp_success'] == 'true') {
-        // await updateGifticon(price);
+      if(result?['imp_success'] == 'true') {
+        await updateGifticon(price);
       }
     })
   );

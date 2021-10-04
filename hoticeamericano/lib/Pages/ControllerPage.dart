@@ -34,7 +34,7 @@ class _ControllerPageState extends State<ControllerPage> {
                 children: <Widget>[
                   Expanded(
                     child: IconButton(
-                      icon: Icon(Icons.wallet_giftcard),
+                      icon: Image.asset('assets/images/present.png', width: 22.0,),
                       onPressed: (() {}),
                     ),
                   ),
@@ -63,16 +63,15 @@ class _ControllerPageState extends State<ControllerPage> {
         elevation: 0.0,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            // icon: Image.asset('assets/images/test.png', width: 24.0),
-            icon: Icon(Icons.home, color: Colors.white,),
+            icon: _index == 0 ? Image.asset('assets/images/coupon_on.png', width: 24.0) : Image.asset('assets/images/coupon_off.png', width: 24.0),
             label: '내쿠폰',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home, color: Colors.white, size: 24.0),
+            icon: _index == 1 ? Image.asset('assets/images/home_on.png', width: 20.0) : Image.asset('assets/images/home_off.png', width: 20.0),
             label: '홈'
           ),
           BottomNavigationBarItem(
-            icon: Image.asset('assets/images/myinfo.png', width: 22.0,),
+            icon: _index == 2 ? Image.asset('assets/images/info_on.png', width: 22.0) : Image.asset('assets/images/info_off.png', width: 22.0),
             label: '내정보'
           ),
         ],

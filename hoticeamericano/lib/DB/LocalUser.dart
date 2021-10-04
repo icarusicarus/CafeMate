@@ -7,7 +7,7 @@ Future<void> upsertUser(LocalUser user) async {
   final Database? _db = await DB.instance.database;
   final List<Map<String, dynamic>> _maps = await _db!.query('user');
 
-  if(_maps[0].isEmpty) {
+  if(_maps.isEmpty) {
     await _db.insert('user', user.toMap(), conflictAlgorithm: ConflictAlgorithm.replace);
   }
 

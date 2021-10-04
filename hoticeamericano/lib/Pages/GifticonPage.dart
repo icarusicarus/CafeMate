@@ -19,13 +19,6 @@ class _GifticonPageState extends State<GifticonPage> with SingleTickerProviderSt
 
   @override
   Widget build(BuildContext context) {
-    Map<String, String>? result = ModalRoute.of(context)!.settings.arguments as Map<String, String>?;
-    print('RESULT: ' + result.toString());
-
-    // if(result!['imp_success'] == 'true') {
-
-    // }
-
     return Flex(
       direction: Axis.vertical,
       children: <Widget>[

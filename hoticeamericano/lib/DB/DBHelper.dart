@@ -1,9 +1,11 @@
 import 'package:flutter/services.dart';
+import 'package:hoticeamericano/Models/Gifticon.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'dart:convert';
 
 import '../Models/Cafe.dart';
+import '../Models/Gifticon.dart';
 
 class DB {
   static const databaseName = "1.db";
@@ -29,9 +31,18 @@ class DB {
 void _onCreate(Database db, _) async {
   await db.execute("CREATE TABLE user (id INTEGER PRIMARY KEY NOT NULL, user_number TEXT NOT NULL, kind INTEGER NOT NULL, name TEXT NOT NULL, email TEXT)");
   await db.execute("CREATE TABLE cafe (id INTEGER PRIMARY KEY NOT NULL, name TEXT, sub_name TEXT, address TEXT, lat REAL, lon REAL)");
-  await db.execute("CREATE TABLE gifticon (id INTEGER PRIMARY KEY NOT NULL, g_4000 INTEGER, g_6000 INTEGER, g_8000 INTEGER, g_10000 INTEGER)");
+  await db.execute("CREATE TABLE gifticon (id INTEGER PRIMARY KEY NOT NULL, user_id INTEGER NOT NULL, g_4000 INTEGER, g_6000 INTEGER, g_8000 INTEGER, g_10000 INTEGER)");
 
   print('seed start');
+  Gifticon _gifticon = Gifticon(
+    user_id: -1,
+    g_4000: -1,
+    g_6000: -1,
+    g_8000: -1,
+    g_10000: -1,
+  );
+  db.insert('gifticon', _gifticon.toMap(), conflictAlgorithm: ConflictAlgorithm.ignore);
+
   final String jsonFile = await rootBundle.loadString('assets/cafe.json');
   final data = await json.decode(jsonFile);
 
