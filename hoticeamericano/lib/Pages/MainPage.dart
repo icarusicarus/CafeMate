@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../Models/Cafe.dart';
 import '../DB/Cafe.dart';
 import '../Pages/Section/CafeCard.dart';
-import 'Section/CardPadding.dart';
 import '../Pages/Section/CafeInformation.dart';
+import './Section/CardPadding.dart';
 
 class MainPage extends StatefulWidget {
   @override
