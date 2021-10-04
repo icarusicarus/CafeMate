@@ -41,7 +41,7 @@ exports.login = async (req, res) => {
                     updated_at: new Date().toString()
                 })
                 .then(() => {
-                    res.status(200).json({ msg: 'success' });
+                    res.status(200).json({ msg: 'welcome', data: id });
                 })
                 .catch(() => {
                     res.status(400).json({ msg: 'error' });
