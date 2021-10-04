@@ -122,8 +122,8 @@ class _CafePageState extends State<CafePage> {
                       ],
                     ),
                     // CafeMap()
-                    CafeInformation()
-                    //CafeMapInfo()
+                    // CafeInformation()
+                    CafeMapInfo()
                   ],
                 )),
           ]))),
