@@ -100,6 +100,7 @@ class _CafePageState extends State<CafePage> {
                         ],
                       )
                     ),
+
                     Container(
                       margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
                       child: Column(
@@ -111,7 +112,7 @@ class _CafePageState extends State<CafePage> {
                               style: TextStyle(color: Colors.white)
                             )
                           ),
-                          CafeInformation()
+                          CafeMapInfo()
                         ],
                       )
                     )
