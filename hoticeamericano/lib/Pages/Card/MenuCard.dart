@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../Utils/DesignValue.dart';
 import '../Navigator/CafePage.dart';
 
-Widget MenuCard(BuildContext context) {
+Widget MenuCard() {
   return Column(children: <Widget>[
     Container(
         width: 120,
