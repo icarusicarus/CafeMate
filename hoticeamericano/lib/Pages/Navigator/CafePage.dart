@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hoticeamericano/Pages/Section/CafeInformation.dart';
 
-import '../Models/Cafe.dart';
-import '../DB/Cafe.dart';
-import './Section/MenuCard.dart';
-import './Section/CafeInformation.dart';
-import './Section/CardPadding.dart';
-import './Section/CafeMapInfo.dart';
+import '../../Models/Cafe.dart';
+import '../../DB/Cafe.dart';
+import '../Card/CafeInformation.dart';
+import '../Card/MenuCard.dart';
+import '../Card/CafeInformation.dart';
+import '../Card/CardPadding.dart';
+import '../Card/CafeMapInfo.dart';
 
 class CafePage extends StatefulWidget {
   @override

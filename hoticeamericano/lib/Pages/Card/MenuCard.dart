@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../Utils/DesignValue.dart';
-import '../../Pages/CafePage.dart';
+import '../Navigator/CafePage.dart';
 
 Widget MenuCard(BuildContext context) {
   return Column(children: <Widget>[

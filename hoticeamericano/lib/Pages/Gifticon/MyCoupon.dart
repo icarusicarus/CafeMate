@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../Section/MyCouponCard.dart';
-import '../Section/CardPadding.dart';
+import '../Card/MyCouponCard.dart';
+import '../Card/CardPadding.dart';
 
 class MyCouponPage extends StatefulWidget {
   @override

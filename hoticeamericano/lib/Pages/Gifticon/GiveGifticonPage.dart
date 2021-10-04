@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../Payment.dart';
-import '../Section/GifticonCard.dart';
-import '../Section/CardPadding.dart';
+import '../Card/GifticonCard.dart';
+import '../Card/CardPadding.dart';
 
 class GiveGifticonPage extends StatefulWidget {
   @override

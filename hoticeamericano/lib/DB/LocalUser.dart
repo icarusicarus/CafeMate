@@ -22,6 +22,7 @@ Future<String> getUserNumber() async {
 
   return _maps[0]['user_number'];
 }
+
 // Future<int> userDelete() async {
 //   final Database? _db = await DB.instance.database;
 //   return await _db!.delete('user', where: 'id = 1');

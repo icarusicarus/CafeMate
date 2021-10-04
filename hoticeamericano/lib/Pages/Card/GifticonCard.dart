@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../Payment.dart';
+import '../Navigator/Payment.dart';
 import '../../Utils/API.dart';
 import '../../Utils/DesignValue.dart';
 
