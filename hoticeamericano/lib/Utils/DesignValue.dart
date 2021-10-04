@@ -1,2 +1,5 @@
-const double cardWidth = 150.0;
-const double imageCardHeight = 120.0;
+const double cafeCardWidth = 150.0;
+const double gifticonCardWidth = 170.0;
+
+const double cafeCardHeight = 120.0;
+const double gifticonCardHeight = 150.0;

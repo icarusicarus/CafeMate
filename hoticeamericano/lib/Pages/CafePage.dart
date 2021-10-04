@@ -6,7 +6,7 @@ import '../Models/Cafe.dart';
 import '../DB/Cafe.dart';
 import './Section/MenuCard.dart';
 import './Section/CafeInformation.dart';
-import './Section/CafeCardPadding.dart';
+import './Section/CardPadding.dart';
 import './Section/CafeMapInfo.dart';
 
 class CafePage extends StatefulWidget {
@@ -100,9 +100,9 @@ class _CafePageState extends State<CafePage> {
                                 scrollDirection: Axis.horizontal,
                                 children: <Widget>[
                                   MenuCard(context),
-                                  CafeCardPadding(),
+                                  CardPadding(),
                                   MenuCard(context),
-                                  CafeCardPadding(),
+                                  CardPadding(),
                                   MenuCard(context),
                                 ],
                               ))
