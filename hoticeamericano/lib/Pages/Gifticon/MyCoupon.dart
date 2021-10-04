@@ -13,7 +13,7 @@ class _MyCouponPageState extends State<MyCouponPage>  {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        padding: const EdgeInsets.only(top: 20.0, right: 30.0, left: 30.0, bottom: 20.0),
+        padding: const EdgeInsets.only(top: 20.0, right: 30.0, left: 30.0, bottom: 35.0),
         color: Color(0xffE4E4E4),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -21,9 +21,9 @@ class _MyCouponPageState extends State<MyCouponPage>  {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                MyCouponCard('4,000'),
+                MyCouponCard(4000),
                 CardPadding(),
-                MyCouponCard('6,000'),
+                MyCouponCard(6000),
               ],
             ),
 
@@ -32,9 +32,9 @@ class _MyCouponPageState extends State<MyCouponPage>  {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                MyCouponCard('8,000'),
+                MyCouponCard(8000),
                 CardPadding(),
-                MyCouponCard('10,000'),
+                MyCouponCard(10000),
               ],
             )
           ],

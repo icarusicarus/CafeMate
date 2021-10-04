@@ -57,3 +57,24 @@ exports.login = async (req, res) => {
         res.status(400).json({ msg: 'error' });
     })
 }
+
+exports.email = (req, res) => {
+    const { email } = req.body;
+
+    await db.user.findOne({
+        raw: true,
+        where: { email: email }
+    })
+    .then((q) => {
+        if(q) {
+            res.status(200).json({ msg: 'success' });
+        }
+
+        else {
+            res.status(400).json({ msg: 'don\'t exist' });
+        }
+    })
+    .catch(() => {
+        res.status(400).json({ msg: 'error' });
+    })
+}

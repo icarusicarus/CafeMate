@@ -13,7 +13,7 @@ class _GiveGifticonPageState extends State<GiveGifticonPage> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        padding: const EdgeInsets.only(top: 20.0, right: 30.0, left: 30.0, bottom: 20.0),
+        padding: const EdgeInsets.only(top: 20.0, right: 30.0, left: 30.0, bottom: 35.0),
         color: Color(0xffE4E4E4),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

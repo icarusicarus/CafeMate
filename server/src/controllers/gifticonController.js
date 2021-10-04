@@ -1,11 +1,11 @@
 const db = require('@models');
 
 exports.update = async (req, res) => {
-    const { userNumber, gifticonKind, gifticonCount } = req.body;
+    const { email, gifticonKind, gifticonCount } = req.body;
 
     await db.user.findOne({
         raw: true,
-        where: { userNumber }
+        where: { email }
     })
     .then(async (q) => {
         const id = q.id;

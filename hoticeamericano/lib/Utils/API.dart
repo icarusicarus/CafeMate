@@ -65,20 +65,44 @@ Future<bool> login(LocalUser user) async {
   return false;
 }
 
-Future<bool> updateGifticon(int price) async {
-  final String _userNumber = await getUserNumber();
+Future<bool> isEmailExisted(String email) async {
+  try {
+    final _emailRequest = await http.post(
+      Uri.parse(url + "user/email/get"),
+      headers: { "Content-Type": "application/json" },
+      body: json.encode({
+        "email": email,
+      })
+    );
+
+    if(_emailRequest.statusCode == 200) {
+      return true;
+    }
+  } on http.ClientException catch(e) {
+    print(e);
+  } catch(e) {
+    print(e);
+  }
+
+  return false;
+}
+
+Future<bool> updateGifticon(int price, {String email='no'}) async {
+  // final String _userNumber = await getUserNumber();
   final String _gifticonKind = "g_" + price.toString();
   final Gifticon _gifticonCount = await getGifticon();
+
+  if(email == 'no')
+    email = await getUserEmail();
 
   try {
     final _gifitconRequest = await http.post(
       Uri.parse(url + "gifticon/update"),
       headers: { "Content-Type": "application/json" },
       body: json.encode({
-        "userNumber": _userNumber,
+        "email": email,
         "gifticonKind": _gifticonKind,
         "gifticonCount": _gifticonCount.toMap()
-
       })
     );
     // Map<String, dynamic> _gifitconResponse = jsonDecode(_gifitconRequest.body);
